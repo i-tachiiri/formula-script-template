@@ -24,68 +24,28 @@ Notion API (PAGE_ID取得・更新)
 
 ### Step 1: GitHubリポジトリ作成
 
-**Claude Code指示例:**
-```
-このテンプレートから新しい数式プロジェクトを作成したい。
-
-基本情報:
-- 数式の種類: 2桁の掛け算
-- プロジェクト名: multiplication-2digit-formula  
-- Notion Page ID: 254d9f5c28f58150a167db703c269da5
-
-以下を実行してください:
-1. 新しいGitHubリポジトリを作成
-2. テンプレートからコードをコピー
-3. PAGE_IDを置換
-4. README.mdを数式用に更新
-```
-
-**GitHub Template機能を使用する場合:**
-1. GitHubで「Use this template」をクリック
-2. 新リポジトリ名を入力
-3. 作成後、Issue テンプレートで情報を整理
+新しいプロジェクトは、Notion側で管理するコマンドで実施されるため、手動でのGitHubリポジトリ作成は不要です。
 
 ### Step 2: Google Apps Script プロジェクト作成
 
 **重要: 必ず指定フォルダに作成**
 ```bash
 # GASプロジェクトを作成（必ずこのフォルダ配下）
-npx clasp create --type standalone --title "[数式名] Formula Generator" --parentId "11ExJC5FifVUDSymmo0LCVFf5kUhJoqMM"
+npx clasp create --type standalone --title "[数式名]" --parentId "11ExJC5FifVUDSymmo0LCVFf5kUhJoqMM"
 ```
 
 ### Step 3: 初期設定
 
 #### 3.1 GCPプロジェクト設定
 ```bash
-# .clasp.jsonにGCPプロジェクトIDを設定
-# "projectId": "develop-341509"
+# GCPプロジェクトIDを設定
+npx clasp setting projectId develop-341509
 
 # Cloud Logging有効化
 npm run setup-logs
 ```
 
-#### 3.2 PAGE_ID設定
-
-**重要**: PAGE_IDは必ず設定が必要です。以下のいずれかの方法で設定してください。
-
-**方法A: Claude Code に依頼**
-```
-PAGE_IDを [あなたのNotion Page ID] に置換してください
-```
-
-**方法B: 手動で置換**
-```javascript
-// src/main.js の1行目
-const PAGE_ID = '{{PAGE_ID}}'; // これを実際のPage IDに変更
-↓
-const PAGE_ID = 'あなたのPage ID'; // 例: '254d9f5c28f58150a167db703c269da5'
-```
-
-**PAGE_IDの確認方法:**
-1. NotionページのURL: `https://www.notion.so/ページ名-254d9f5c28f58150a167db703c269da5`
-2. ハイフンを除いた32文字: `254d9f5c28f58150a167db703c269da5`
-
-#### 3.3 KeyVault Library参照
+#### 3.2 KeyVault Library参照
 appsscript.jsonに以下が含まれていることを確認:
 ```json
 {
@@ -120,10 +80,9 @@ Claude に以下を伝えて要件を整理してもらいます:
 ```
 
 Claude が確認すべき項目:
-1. **数式の種類と複雑さ**
-   - 基本演算 / 文章題 / 数学公式 / その他
-   - 難易度レベル
-   - 特別な制約や条件
+1. **数式の代数表現**
+   - 数式を代数で表現（例: ax + b、x² + bx + c など）
+   - 各代数の取りうる値の条件と範囲
 
 2. **出力フォーマット**
    - 配列形式: `[3, '+', 5, '=', 8]`
@@ -131,14 +90,11 @@ Claude が確認すべき項目:
    - カスタム形式: `[['問題', '3個のりんごに5個追加すると？', '答え', 8]]`
 
 3. **生成パラメータ**
-   - 数値範囲
    - 問題数
    - ランダム性の要件
 
-4. **特別な要件**
-   - 重複排除
-   - 段階的難易度
-   - 特定の数値パターン
+4. **重要な制約**
+   - ページ内で問題の重複は発生しない（自動的に重複排除される）
 
 ### Phase 2: 実装
 Claude が以下を実装:
