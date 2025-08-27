@@ -2,6 +2,16 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## 🎯 For New Formula Projects
+
+**If you're helping create a NEW formula generation script from this template, please read `SETUP_GUIDE.md` first.** This document contains complete instructions for:
+- Creating new GitHub repositories
+- Setting up Google Apps Script projects in the correct folder
+- Understanding the architecture and workflow
+- Step-by-step implementation guidance
+
+## 📋 Template Overview
+
 ## Project Overview
 
 This is a Google Apps Script template for formula generation projects. It provides a base structure for developing mathematical formula generation functionality that integrates with Google Sheets through CLASP (Google Apps Script CLI).

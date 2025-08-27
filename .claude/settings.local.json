@@ -12,7 +12,9 @@
       "Bash(npx clasp create:*)",
       "Bash(npx clasp:*)",
       "Bash(npm run setup-logs:*)",
-      "Bash(npm run logs:*)"
+      "Bash(npm run logs:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
     ],
     "deny": [],
     "ask": []
