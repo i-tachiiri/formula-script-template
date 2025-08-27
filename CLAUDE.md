@@ -96,5 +96,6 @@ generateFormulas() {
 ## External Dependencies
 
 - Google Apps Script runtime (V8)
-- FormulaSharedLib for Notion and Spreadsheet operations
+- KeyVault Library for secure credential management (ID: 18YfPGRKVqtDQNXIVIK6pijnu3hox2mBfFMY11l_A61y1x7qs7Uz6k4zG)
+- Local NotionService and SpreadsheetService implementations
 - Asia/Tokyo timezone configured for main appsscript.json

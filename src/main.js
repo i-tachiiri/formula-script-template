@@ -4,8 +4,8 @@ function generateAndWriteFormulas() {
   console.log(`Starting formula generation for page: ${PAGE_ID}`);
   
   try {
-    const notionService = new FormulaSharedLib.NotionService();
-    const spreadsheetService = new FormulaSharedLib.SpreadsheetService();
+    const notionService = new NotionService();
+    const spreadsheetService = new SpreadsheetService();
     const formulaGenerator = new FormulaGenerator();
     
     console.log('Getting QuestionSheetUrl from Notion...');

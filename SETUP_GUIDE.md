@@ -85,15 +85,15 @@ const PAGE_ID = 'あなたのPage ID'; // 例: '254d9f5c28f58150a167db703c269da5
 1. NotionページのURL: `https://www.notion.so/ページ名-254d9f5c28f58150a167db703c269da5`
 2. ハイフンを除いた32文字: `254d9f5c28f58150a167db703c269da5`
 
-#### 3.3 FormulaSharedLib参照
+#### 3.3 KeyVault Library参照
 appsscript.jsonに以下が含まれていることを確認:
 ```json
 {
   "dependencies": {
     "libraries": [
       {
-        "userSymbol": "FormulaSharedLib",
-        "libraryId": "1q07i4PHy9Xkb-WQji0Jr7g_67-9MIbBHp4pR9lwhf_98RECClaR3Fjkv",
+        "userSymbol": "KeyVault",
+        "libraryId": "18YfPGRKVqtDQNXIVIK6pijnu3hox2mBfFMY11l_A61y1x7qs7Uz6k4zG",
         "version": "1"
       }
     ]

@@ -70,7 +70,7 @@ npx clasp create --type standalone --title "[数式名] Formula Generator" --par
 - [ ] **PAGE_ID置換** - `{{PAGE_ID}}` を実際のNotion Page IDに置換
 - [ ] GCPプロジェクトID設定（`develop-341509`）
 - [ ] `npm run setup-logs` 実行
-- [ ] FormulaSharedLib参照確認
+- [ ] KeyVault Library参照確認
 
 ### PAGE_ID置換の実装例
 ```javascript
