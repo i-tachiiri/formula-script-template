@@ -100,19 +100,10 @@ try {
 
   // Step 6: GASプロジェクト作成コマンドを表示
   console.log('\n⚡ 次に実行するコマンド:');
-  console.log('📋 以下をコピーして実行してください:\n');
   
   console.log(`# プロジェクトディレクトリに移動`);
   console.log(`cd ${config.projectName}`);
-  console.log('');
-  console.log(`# GASプロジェクト作成`);
-  console.log(`npx clasp create --type standalone --title "${config.formulaType} Formula Generator" --parentId "11ExJC5FifVUDSymmo0LCVFf5kUhJoqMM"`);
-  console.log('');
-  console.log(`# 初期設定`);
-  console.log(`npm run setup-logs`);
-  console.log('');
-  console.log(`# 初回プッシュ`);
-  console.log(`git add . && git commit -m "Initial setup with PAGE_ID: ${config.pageId}" && git push`);
+  console.log('');  
 
   console.log('\n🤖 Claude Code 推奨プロンプト:');
   console.log('─'.repeat(60));
