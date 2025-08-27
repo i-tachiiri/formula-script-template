@@ -49,33 +49,47 @@ console.log('🚀 新しい数式プロジェクトを作成中...');
 console.log('📝 設定:', config);
 
 try {
-  // Step 1: GitHubリポジトリ作成
-  console.log('\n📂 GitHubリポジトリを作成中...');
-  execSync(`gh repo create ${config.projectName} --template i-tachiiri/formula-script-template --public --clone`, {
-    stdio: 'inherit'
-  });
+  // Step 1: GitHubリポジトリの存在チェックとクローン/作成
+  let repositoryExists = false;
+  
+  try {
+    execSync(`gh repo view ${config.projectName}`, { stdio: 'pipe' });
+    repositoryExists = true;
+    console.log('\n📂 既存のリポジトリが見つかりました。クローンします...');
+    execSync(`gh repo clone ${config.projectName}`, { stdio: 'inherit' });
+  } catch (error) {
+    console.log('\n📂 新しいGitHubリポジトリを作成中...');
+    execSync(`gh repo create ${config.projectName} --template i-tachiiri/formula-script-template --public --clone`, {
+      stdio: 'inherit'
+    });
+  }
 
   // Step 2: ディレクトリに移動
   const projectDir = config.projectName;
   process.chdir(projectDir);
   console.log(`📁 ${projectDir} に移動しました`);
 
-  // Step 3: PAGE_IDを置換
-  console.log('\n🔄 PAGE_IDを置換中...');
-  const mainJsPath = path.join('src', 'main.js');
-  const mainJsContent = fs.readFileSync(mainJsPath, 'utf8');
-  const updatedContent = mainJsContent.replace('{{PAGE_ID}}', config.pageId);
-  fs.writeFileSync(mainJsPath, updatedContent);
-  console.log(`✅ PAGE_ID を ${config.pageId} に置換しました`);
+  if (!repositoryExists) {
+    // Step 3: PAGE_IDを置換（新規作成時のみ）
+    console.log('\n🔄 PAGE_IDを置換中...');
+    const mainJsPath = path.join('src', 'main.js');
+    const mainJsContent = fs.readFileSync(mainJsPath, 'utf8');
+    const updatedContent = mainJsContent.replace('{{PAGE_ID}}', config.pageId);
+    fs.writeFileSync(mainJsPath, updatedContent);
+    console.log(`✅ PAGE_ID を ${config.pageId} に置換しました`);
 
-  // Step 4: README.mdを更新
-  console.log('\n📄 README.mdを更新中...');
-  const readmePath = 'README.md';
-  let readmeContent = fs.readFileSync(readmePath, 'utf8');
-  readmeContent = readmeContent.replace(/# Formula Script Template/g, `# ${config.formulaType} Formula Generator`);
-  readmeContent = readmeContent.replace(/数式生成テンプレートプロジェクトです。/g, `${config.formulaType}の数式生成プロジェクトです。`);
-  fs.writeFileSync(readmePath, readmeContent);
-  console.log(`✅ README.md を ${config.formulaType} 用に更新しました`);
+    // Step 4: README.mdを更新（新規作成時のみ）
+    console.log('\n📄 README.mdを更新中...');
+    const readmePath = 'README.md';
+    let readmeContent = fs.readFileSync(readmePath, 'utf8');
+    readmeContent = readmeContent.replace(/# Formula Script Template/g, `# ${config.formulaType} Formula Generator`);
+    readmeContent = readmeContent.replace(/数式生成テンプレートプロジェクトです。/g, `${config.formulaType}の数式生成プロジェクトです。`);
+    fs.writeFileSync(readmePath, readmeContent);
+    console.log(`✅ README.md を ${config.formulaType} 用に更新しました`);
+  } else {
+    console.log('\n📝 既存リポジトリのため、PAGE_ID置換とREADME更新をスキップしました');
+    console.log(`ℹ️  必要に応じて手動でPAGE_IDを確認してください: ${config.pageId}`);
+  }
 
   // Step 5: GASプロジェクト作成コマンドを表示
   console.log('\n⚡ 次に実行するコマンド:');
