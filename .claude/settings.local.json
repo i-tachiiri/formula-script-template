@@ -16,7 +16,12 @@
       "Bash(git commit:*)",
       "Bash(git push:*)",
       "Bash(chmod:*)",
-      "WebFetch(domain:raw.githubusercontent.com)"
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(git rm:*)",
+      "Bash(git check-ignore:*)",
+      "Bash(git ls-tree:*)",
+      "WebFetch(domain:github.com)",
+      "Bash(gh repo view:*)"
     ],
     "deny": [],
     "ask": []
