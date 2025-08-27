@@ -35,18 +35,28 @@ if (missingParams.length > 0) {
   process.exit(1);
 }
 
+// プロジェクト名をPageIdベースに統一
+if (/^[0-9a-f]{32}$/.test(config.projectName)) {
+  // PageIdをそのままプロジェクト名として使用
+  console.log(`📝 プロジェクト名をPageIdベースで設定: ${config.projectName}`);
+} else if (config.projectName.length > 50) {
+  // 長すぎる場合はPageIdを使用
+  config.projectName = config.pageId;
+  console.log(`📝 プロジェクト名をPageIdに変更: ${config.projectName}`);
+}
+
 console.log('🚀 新しい数式プロジェクトを作成中...');
 console.log('📝 設定:', config);
 
 try {
   // Step 1: GitHubリポジトリ作成
   console.log('\n📂 GitHubリポジトリを作成中...');
-  execSync(`gh repo create ${config.projectName}-formula --template i-tachiiri/formula-script-template --public --clone`, {
+  execSync(`gh repo create ${config.projectName} --template i-tachiiri/formula-script-template --public --clone`, {
     stdio: 'inherit'
   });
 
   // Step 2: ディレクトリに移動
-  const projectDir = `${config.projectName}-formula`;
+  const projectDir = config.projectName;
   process.chdir(projectDir);
   console.log(`📁 ${projectDir} に移動しました`);
 
@@ -83,8 +93,9 @@ try {
   // Step 6: 完了メッセージ
   console.log('\n🎉 プロジェクト作成完了!');
   console.log(`📁 プロジェクトフォルダ: ${projectDir}`);
-  console.log(`🔗 GitHub: https://github.com/${process.env.GITHUB_USER || '[YOUR_USERNAME]'}/${config.projectName}-formula`);
+  console.log(`🔗 GitHub: https://github.com/${process.env.GITHUB_USER || '[YOUR_USERNAME]'}/${config.projectName}`);
   console.log(`📄 PAGE_ID: ${config.pageId}`);
+  console.log(`📋 商品名: ${config.formulaType}`);
   
   console.log('\n📋 次のステップ:');
   console.log('1. 上記のGASプロジェクト作成コマンドを実行');
