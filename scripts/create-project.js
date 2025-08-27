@@ -1,0 +1,98 @@
+#!/usr/bin/env node
+
+/**
+ * Formula Script Template - 自動プロジェクト作成スクリプト
+ * 
+ * 使用方法:
+ * curl -fsSL https://raw.githubusercontent.com/i-tachiiri/formula-script-template/main/scripts/create-project.js | node - pageId=PAGE_ID projectName=PROJECT_NAME formulaType="FORMULA_TYPE"
+ * 
+ * または:
+ * node create-project.js pageId=254d9f5c28f58150a167db703c269da5 projectName=addition-basic formulaType="基本足し算"
+ */
+
+const { execSync } = require('child_process');
+const fs = require('fs');
+const path = require('path');
+
+// コマンドライン引数から設定を取得
+const args = process.argv.slice(2);
+const config = {};
+
+// 引数をパース (key=value 形式)
+args.forEach(arg => {
+  const [key, value] = arg.split('=');
+  config[key] = value;
+});
+
+// 必須パラメータのチェック
+const requiredParams = ['pageId', 'projectName', 'formulaType'];
+const missingParams = requiredParams.filter(param => !config[param]);
+
+if (missingParams.length > 0) {
+  console.error('❌ 必須パラメータが不足しています:', missingParams.join(', '));
+  console.log('\n使用例:');
+  console.log('node create-project.js pageId=254d9f5c28f58150a167db703c269da5 projectName=addition-basic formulaType=足し算');
+  process.exit(1);
+}
+
+console.log('🚀 新しい数式プロジェクトを作成中...');
+console.log('📝 設定:', config);
+
+try {
+  // Step 1: GitHubリポジトリ作成
+  console.log('\n📂 GitHubリポジトリを作成中...');
+  execSync(`gh repo create ${config.projectName}-formula --template i-tachiiri/formula-script-template --public --clone`, {
+    stdio: 'inherit'
+  });
+
+  // Step 2: ディレクトリに移動
+  const projectDir = `${config.projectName}-formula`;
+  process.chdir(projectDir);
+  console.log(`📁 ${projectDir} に移動しました`);
+
+  // Step 3: PAGE_IDを置換
+  console.log('\n🔄 PAGE_IDを置換中...');
+  const mainJsPath = path.join('src', 'main.js');
+  const mainJsContent = fs.readFileSync(mainJsPath, 'utf8');
+  const updatedContent = mainJsContent.replace('{{PAGE_ID}}', config.pageId);
+  fs.writeFileSync(mainJsPath, updatedContent);
+  console.log(`✅ PAGE_ID を ${config.pageId} に置換しました`);
+
+  // Step 4: README.mdを更新
+  console.log('\n📄 README.mdを更新中...');
+  const readmePath = 'README.md';
+  let readmeContent = fs.readFileSync(readmePath, 'utf8');
+  readmeContent = readmeContent.replace(/# Formula Script Template/g, `# ${config.formulaType} Formula Generator`);
+  readmeContent = readmeContent.replace(/数式生成テンプレートプロジェクトです。/g, `${config.formulaType}の数式生成プロジェクトです。`);
+  fs.writeFileSync(readmePath, readmeContent);
+  console.log(`✅ README.md を ${config.formulaType} 用に更新しました`);
+
+  // Step 5: GASプロジェクト作成コマンドを表示
+  console.log('\n⚡ 次に実行するコマンド:');
+  console.log('📋 以下をコピーして実行してください:\n');
+  
+  console.log(`# GASプロジェクト作成`);
+  console.log(`npx clasp create --type standalone --title "${config.formulaType} Formula Generator" --parentId "11ExJC5FifVUDSymmo0LCVFf5kUhJoqMM"`);
+  console.log('');
+  console.log(`# 初期設定`);
+  console.log(`npm run setup-logs`);
+  console.log('');
+  console.log(`# 初回プッシュ`);
+  console.log(`git add . && git commit -m "Initial setup with PAGE_ID: ${config.pageId}" && git push`);
+
+  // Step 6: 完了メッセージ
+  console.log('\n🎉 プロジェクト作成完了!');
+  console.log(`📁 プロジェクトフォルダ: ${projectDir}`);
+  console.log(`🔗 GitHub: https://github.com/${process.env.GITHUB_USER || '[YOUR_USERNAME]'}/${config.projectName}-formula`);
+  console.log(`📄 PAGE_ID: ${config.pageId}`);
+  
+  console.log('\n📋 次のステップ:');
+  console.log('1. 上記のGASプロジェクト作成コマンドを実行');
+  console.log('2. src/FormulaGenerator.js で generateFormulas() を実装');
+  console.log('3. npm run build でGASにデプロイ');
+  console.log('4. GAS側で testFormulaGeneration() を実行してテスト');
+
+} catch (error) {
+  console.error('❌ エラーが発生しました:', error.message);
+  process.exit(1);
+}

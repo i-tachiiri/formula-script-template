@@ -16,6 +16,7 @@ Google Apps Script用の数式生成テンプレートプロジェクトです�
 ## 📚 ドキュメント
 
 ### 🚀 新しい数式プロジェクトを作成する場合
+- **[NOTION_INTEGRATION.md](./NOTION_INTEGRATION.md)** - ⚡ Notionワンライナー作成（推奨）
 - **[SETUP_GUIDE.md](./SETUP_GUIDE.md)** - 完全なセットアップ・実装ガイド
 - **[CLAUDE_QUICK_START.md](./CLAUDE_QUICK_START.md)** - Claude Code用クイックスタート
 
@@ -30,6 +31,17 @@ main.js → FormulaGenerator.js → FormulaSharedLib → Google Sheets
     ↓
 Notion API (PAGE_ID取得・更新)
 ```
+
+## ⚡ クイックスタート
+
+### Notionから1コマンドで作成（推奨）
+```bash
+# Notionの CreateCommand カラムから生成されたコマンドをコピペ実行
+curl -fsSL https://raw.githubusercontent.com/i-tachiiri/formula-script-template/main/scripts/create-project.js | node - pageId=あなたのPageID projectName=プロジェクト名 formulaType="数式種類"
+```
+
+### 手動作成の場合
+詳細は [SETUP_GUIDE.md](./SETUP_GUIDE.md) をご覧ください。
 
 ## セットアップ
 
