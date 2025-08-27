@@ -1,0 +1,23 @@
+# GitHub Template Configuration
+# テンプレートリポジトリからの作成時の設定
+
+template:
+  # テンプレート作成時に自動で置換される文字列
+  placeholder_replacements:
+    - placeholder: "{{PAGE_ID}}"
+      description: "NotionページのID（32文字）"
+      example: "254d9f5c28f58150a167db703c269da5"
+      
+    - placeholder: "{{PROJECT_NAME}}"
+      description: "プロジェクト名"
+      example: "addition-basic-formula"
+      
+    - placeholder: "{{FORMULA_TYPE}}"
+      description: "数式の種類"
+      example: "足し算"
+
+  # 自動作成されるIssue
+  auto_create_issue:
+    title: "🚀 新プロジェクトセットアップ"
+    template: "new-formula-project.md"
+    assignee: "@author"

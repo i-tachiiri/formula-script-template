@@ -28,7 +28,7 @@
 📝 **基本情報**
 1. 数式の種類は？（例：足し算、文章題、微分積分など）
 2. プロジェクト名は？（例：addition-basic-formula）
-3. Notion Page ID は？
+3. Notion Page ID は？（URLから取得: notion.so/ページ名-[32文字のID]）
 
 🎯 **数式の詳細**
 4. 難易度や範囲は？（例：1-10の数字、2桁まで）
@@ -42,10 +42,15 @@
 
 **Step 2-3: 実装手順**
 1. GitHubリポジトリ作成
-2. GASプロジェクト作成（必ず指定フォルダ: `11ExJC5FifVUDSymmo0LCVFf5kUhJoqMM`）
-3. 初期設定
-4. FormulaGenerator実装
-5. テスト・デプロイ
+2. **PAGE_ID置換** (`{{PAGE_ID}}` → 実際のID)
+3. GASプロジェクト作成（必ず指定フォルダ: `11ExJC5FifVUDSymmo0LCVFf5kUhJoqMM`）
+4. 初期設定（GCP、ログ設定）
+5. FormulaGenerator実装
+6. テスト・デプロイ
+
+**PAGE_ID置換は最優先で実行**
+- 忘れると実行時エラーになります
+- `src/main.js`の1行目を確認
 
 ## 🛠️ 実装時の重要ポイント
 
@@ -62,10 +67,18 @@ npx clasp create --type standalone --title "[数式名] Formula Generator" --par
 ```
 
 ### 初期設定チェックリスト
-- [ ] PAGE_ID を `{{PAGE_ID}}` から実際のIDに置換
+- [ ] **PAGE_ID置換** - `{{PAGE_ID}}` を実際のNotion Page IDに置換
 - [ ] GCPプロジェクトID設定（`develop-341509`）
 - [ ] `npm run setup-logs` 実行
 - [ ] FormulaSharedLib参照確認
+
+### PAGE_ID置換の実装例
+```javascript
+// src/main.js の置換
+const PAGE_ID = '{{PAGE_ID}}';
+↓
+const PAGE_ID = '254d9f5c28f58150a167db703c269da5'; // ユーザー提供のID
+```
 
 ### 数式生成実装
 ```javascript

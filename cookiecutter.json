@@ -1,0 +1,8 @@
+{
+    "project_name": "formula-project",
+    "formula_type": "基本演算",
+    "notion_page_id": "{{cookiecutter.notion_page_id}}",
+    "author_name": "{{cookiecutter.author_name}}",
+    "github_username": "{{cookiecutter.github_username}}",
+    "project_short_description": "{{cookiecutter.formula_type}}の数式生成プロジェクト"
+}

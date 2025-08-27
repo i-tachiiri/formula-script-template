@@ -27,14 +27,23 @@ Notion API (PAGE_ID取得・更新)
 **Claude Code指示例:**
 ```
 このテンプレートから新しい数式プロジェクトを作成したい。
-数式の種類: [例: 2桁の掛け算]
-プロジェクト名: [例: multiplication-2digit-formula]
+
+基本情報:
+- 数式の種類: 2桁の掛け算
+- プロジェクト名: multiplication-2digit-formula  
+- Notion Page ID: 254d9f5c28f58150a167db703c269da5
 
 以下を実行してください:
 1. 新しいGitHubリポジトリを作成
 2. テンプレートからコードをコピー
-3. README.mdを数式用に更新
+3. PAGE_IDを置換
+4. README.mdを数式用に更新
 ```
+
+**GitHub Template機能を使用する場合:**
+1. GitHubで「Use this template」をクリック
+2. 新リポジトリ名を入力
+3. 作成後、Issue テンプレートで情報を整理
 
 ### Step 2: Google Apps Script プロジェクト作成
 
@@ -56,10 +65,25 @@ npm run setup-logs
 ```
 
 #### 3.2 PAGE_ID設定
-```javascript
-// src/main.js
-const PAGE_ID = '{{PAGE_ID}}'; // 実際のNotion Page IDに置換
+
+**重要**: PAGE_IDは必ず設定が必要です。以下のいずれかの方法で設定してください。
+
+**方法A: Claude Code に依頼**
 ```
+PAGE_IDを [あなたのNotion Page ID] に置換してください
+```
+
+**方法B: 手動で置換**
+```javascript
+// src/main.js の1行目
+const PAGE_ID = '{{PAGE_ID}}'; // これを実際のPage IDに変更
+↓
+const PAGE_ID = 'あなたのPage ID'; // 例: '254d9f5c28f58150a167db703c269da5'
+```
+
+**PAGE_IDの確認方法:**
+1. NotionページのURL: `https://www.notion.so/ページ名-254d9f5c28f58150a167db703c269da5`
+2. ハイフンを除いた32文字: `254d9f5c28f58150a167db703c269da5`
 
 #### 3.3 FormulaSharedLib参照
 appsscript.jsonに以下が含まれていることを確認:
