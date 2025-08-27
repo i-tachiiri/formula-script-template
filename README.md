@@ -16,9 +16,7 @@ Google Apps Script用の数式生成テンプレートプロジェクトです�
 ## 📚 ドキュメント
 
 ### 🚀 新しい数式プロジェクトを作成する場合
-- **[NOTION_INTEGRATION.md](./NOTION_INTEGRATION.md)** - ⚡ Notionワンライナー作成（推奨）
 - **[SETUP_GUIDE.md](./SETUP_GUIDE.md)** - 完全なセットアップ・実装ガイド
-- **[CLAUDE_QUICK_START.md](./CLAUDE_QUICK_START.md)** - Claude Code用クイックスタート
 
 ### 🛠️ 開発者向け
 - **[CLAUDE.md](./CLAUDE.md)** - Claude Code技術仕様
@@ -34,32 +32,24 @@ Notion API (PAGE_ID取得・更新)
 
 ## ⚡ クイックスタート
 
-### Notionから1コマンドで作成（推奨）
+### テンプレートから新しいプロジェクトを作成
 ```bash
-# Notionの CreateCommand カラムから生成されたコマンドをコピペ実行
 curl -fsSL https://raw.githubusercontent.com/i-tachiiri/formula-script-template/main/scripts/create-project.js | node - pageId=あなたのPageID projectName=プロジェクト名 formulaType="数式種類"
 ```
 
-### 手動作成の場合
+### セットアップと実装
 詳細は [SETUP_GUIDE.md](./SETUP_GUIDE.md) をご覧ください。
 
-## セットアップ
+## 💻 開発環境のセットアップ
 
-1. リポジトリをクローン
-```bash
-git clone https://github.com/i-tachiiri/formula-script-template.git
-cd formula-script-template
-```
-
-2. 依存関係をインストール
+1. 依存関係をインストール
 ```bash
 npm install
 ```
 
-3. CLASPにログインし、プロジェクトを作成
+2. CLASP ログイン
 ```bash
 npx clasp login
-npx clasp create --type sheets
 ```
 
 ## 使用方法
