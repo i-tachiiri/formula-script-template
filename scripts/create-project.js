@@ -91,10 +91,20 @@ try {
     console.log(`ℹ️  必要に応じて手動でPAGE_IDを確認してください: ${config.pageId}`);
   }
 
-  // Step 5: GASプロジェクト作成コマンドを表示
+  // Step 5: 完了メッセージ
+  console.log('\n🎉 プロジェクト作成完了!');
+  console.log(`📁 プロジェクトフォルダ: ${projectDir}`);
+  console.log(`🔗 GitHub: https://github.com/${process.env.GITHUB_USER || '[YOUR_USERNAME]'}/${config.projectName}`);
+  console.log(`📄 PAGE_ID: ${config.pageId}`);
+  console.log(`📋 商品名: ${config.formulaType}`);
+
+  // Step 6: GASプロジェクト作成コマンドを表示
   console.log('\n⚡ 次に実行するコマンド:');
   console.log('📋 以下をコピーして実行してください:\n');
   
+  console.log(`# プロジェクトディレクトリに移動`);
+  console.log(`cd ${config.projectName}`);
+  console.log('');
   console.log(`# GASプロジェクト作成`);
   console.log(`npx clasp create --type standalone --title "${config.formulaType} Formula Generator" --parentId "11ExJC5FifVUDSymmo0LCVFf5kUhJoqMM"`);
   console.log('');
@@ -104,19 +114,6 @@ try {
   console.log(`# 初回プッシュ`);
   console.log(`git add . && git commit -m "Initial setup with PAGE_ID: ${config.pageId}" && git push`);
 
-  // Step 6: 完了メッセージ
-  console.log('\n🎉 プロジェクト作成完了!');
-  console.log(`📁 プロジェクトフォルダ: ${projectDir}`);
-  console.log(`🔗 GitHub: https://github.com/${process.env.GITHUB_USER || '[YOUR_USERNAME]'}/${config.projectName}`);
-  console.log(`📄 PAGE_ID: ${config.pageId}`);
-  console.log(`📋 商品名: ${config.formulaType}`);
-  
-  console.log('\n📋 次のステップ:');
-  console.log('1. 上記のGASプロジェクト作成コマンドを実行');
-  console.log('2. Claude Code で数式実装を依頼（推奨プロンプト↓）');
-  console.log('3. npm run build でGASにデプロイ');
-  console.log('4. GAS側で testFormulaGeneration() を実行してテスト');
-  
   console.log('\n🤖 Claude Code 推奨プロンプト:');
   console.log('─'.repeat(60));
   console.log(`このプロジェクトで${config.formulaType}の数式生成を実装したい。`);
