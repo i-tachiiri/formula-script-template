@@ -1,0 +1,18 @@
+{
+  "name": "formula-template",
+  "version": "1.0.0",
+  "description": "Template for formula generation Apps Script projects",
+  "scripts": {
+    "build": "clasp push",
+    "watch": "clasp push --watch",
+    "open": "clasp open",
+    "logs": "clasp logs",
+    "deploy": "clasp deploy",
+    "pull": "clasp pull",
+    "status": "clasp versions"
+  },
+  "devDependencies": {
+    "@google/clasp": "^2.4.2",
+    "@types/google-apps-script": "^1.0.83"
+  }
+}
