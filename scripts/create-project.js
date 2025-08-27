@@ -113,9 +113,15 @@ try {
   
   console.log('\n📋 次のステップ:');
   console.log('1. 上記のGASプロジェクト作成コマンドを実行');
-  console.log('2. src/FormulaGenerator.js で generateFormulas() を実装');
+  console.log('2. Claude Code で数式実装を依頼（推奨プロンプト↓）');
   console.log('3. npm run build でGASにデプロイ');
   console.log('4. GAS側で testFormulaGeneration() を実行してテスト');
+  
+  console.log('\n🤖 Claude Code 推奨プロンプト:');
+  console.log('─'.repeat(60));
+  console.log(`このプロジェクトで${config.formulaType}の数式生成を実装したい。`);
+  console.log('README.md と SETUP_GUIDE.md を参照し、実装の計画を立て、不明点があれば聞いて下さい。');
+  console.log('─'.repeat(60));
 
 } catch (error) {
   console.error('❌ エラーが発生しました:', error.message);

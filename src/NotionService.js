@@ -60,4 +60,65 @@ class NotionService {
   getQuestionSheetUrl(pageId) {
     return this.getPageProperty(pageId, 'QuestionSheetUrl');
   }
+  
+  updatePageProperty(pageId, propertyName, value) {
+    try {
+      console.log(`Updating property ${propertyName} on page ${pageId} with value: ${value}`);
+      
+      const url = `${this.baseUrl}/pages/${pageId}`;
+      const payload = {
+        properties: {}
+      };
+      
+      // URLプロパティの場合
+      if (propertyName === 'QuizScriptUrl') {
+        payload.properties[propertyName] = { url: value };
+      } else {
+        // 他のプロパティタイプにも対応可能
+        payload.properties[propertyName] = { url: value };
+      }
+      
+      const options = {
+        method: 'PATCH',
+        headers: {
+          'Authorization': `Bearer ${this.apiToken}`,
+          'Notion-Version': this.apiVersion,
+          'Content-Type': 'application/json'
+        },
+        payload: JSON.stringify(payload)
+      };
+      
+      const response = UrlFetchApp.fetch(url, options);
+      const data = JSON.parse(response.getContentText());
+      
+      if (response.getResponseCode() !== 200) {
+        throw new Error(`Notion API error: ${data.message}`);
+      }
+      
+      console.log(`✅ Successfully updated ${propertyName} on page ${pageId}`);
+      return data;
+      
+    } catch (error) {
+      console.error(`❌ Error updating Notion page property: ${error}`);
+      throw error;
+    }
+  }
+  
+  updateNotionWithScriptUrl(pageId) {
+    try {
+      const scriptId = ScriptApp.getScriptId();
+      const scriptUrl = `https://script.google.com/d/${scriptId}/edit`;
+      
+      console.log(`🔄 Updating Notion with Script URL: ${scriptUrl}`);
+      
+      this.updatePageProperty(pageId, 'QuizScriptUrl', scriptUrl);
+      
+      console.log('✅ Notion QuizScriptUrl updated successfully');
+      return scriptUrl;
+      
+    } catch (error) {
+      console.error('❌ Failed to update Notion with script URL:', error);
+      throw error;
+    }
+  }
 }
