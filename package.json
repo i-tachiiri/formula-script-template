@@ -7,6 +7,8 @@
     "watch": "clasp push --watch",
     "open": "clasp open",
     "logs": "clasp logs",
+    "logs:watch": "clasp logs --watch",
+    "setup-logs": "clasp setup-logs",
     "deploy": "clasp deploy",
     "pull": "clasp pull",
     "status": "clasp versions"

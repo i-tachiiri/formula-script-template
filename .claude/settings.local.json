@@ -4,7 +4,15 @@
       "Bash(gh repo create:*)",
       "Bash(git init:*)",
       "Bash(git remote add:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(gh repo edit:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm run open:*)",
+      "Bash(npx clasp login:*)",
+      "Bash(npx clasp create:*)",
+      "Bash(npx clasp:*)",
+      "Bash(npm run setup-logs:*)",
+      "Bash(npm run logs:*)"
     ],
     "deny": [],
     "ask": []

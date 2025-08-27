@@ -2,60 +2,57 @@ class FormulaGenerator {
   constructor() {}
   
   generateFormulas() {
-    // Template method - override in specific implementations
+    /**
+     * OVERRIDE THIS METHOD in your specific formula generator implementation
+     * 
+     * This method should return an array of formulas. The format is flexible and depends on your needs:
+     * 
+     * Format examples:
+     * - Standard equation: [3, '+', 5, '=', 8]
+     * - Without equals: [3, '+', 5] (for fill-in problems)
+     * - String format: ['3 + 5 = 8'] (for display purposes)
+     * - Mixed format: [12, '÷', 3, '=', 4] (with any operators)
+     * 
+     * Implementation guidance:
+     * 1. Choose the format that fits your formula type (basic, vertical, word problems, etc.)
+     * 2. Determine parameters (number ranges, operations, difficulty)
+     * 3. Use utility methods for generation and validation
+     * 4. Return the complete formula array
+     * 
+     * Example implementation patterns:
+     * ```javascript
+     * // Basic equations
+     * generateFormulas() {
+     *   const formulas = [];
+     *   for (let i = 0; i < 20; i++) {
+     *     formulas.push(this.createBasicAddition(1, 10));
+     *   }
+     *   return this.shuffleArray(formulas);
+     * }
+     * 
+     * // String format problems
+     * generateFormulas() {
+     *   const formulas = [];
+     *   for (let i = 0; i < 10; i++) {
+     *     const num1 = this.generateRandomNumber(1, 10);
+     *     const num2 = this.generateRandomNumber(1, 10);
+     *     const result = num1 + num2;
+     *     formulas.push([`${num1} + ${num2} = ${result}`]);
+     *   }
+     *   return formulas;
+     * }
+     * ```
+     */
     console.log('Base FormulaGenerator - override this method');
-    return [];
+    throw new Error('generateFormulas() must be implemented in subclass');
   }
   
-  validateFormula(formula) {
-    if (!Array.isArray(formula) || formula.length !== 5) {
-      return false;
-    }
-    
-    const [num1, operator, num2, equals, result] = formula;
-    
-    if (typeof num1 !== 'number' || typeof num2 !== 'number' || typeof result !== 'number') {
-      return false;
-    }
-    
-    if (equals !== '=') {
-      return false;
-    }
-    
-    // Basic validation - can be overridden for specific operations
-    switch (operator) {
-      case '+':
-        return num1 + num2 === result;
-      case '-':
-        return num1 - num2 === result;
-      case '*':
-        return num1 * num2 === result;
-      case '/':
-        return num1 / num2 === result;
-      default:
-        console.log(`Unknown operator: ${operator}`);
-        return false;
-    }
-  }
   
-  validateFormulas(formulas) {
-    const invalidFormulas = formulas.filter((formula, index) => {
-      const isValid = this.validateFormula(formula);
-      if (!isValid) {
-        console.log(`Invalid formula at index ${index}:`, formula);
-      }
-      return !isValid;
-    });
-    
-    if (invalidFormulas.length > 0) {
-      console.error(`Found ${invalidFormulas.length} invalid formulas`);
-      return false;
-    }
-    
-    console.log(`All ${formulas.length} formulas are valid`);
-    return true;
-  }
-  
+  // ============ UTILITY METHODS ============
+  // These methods are ready to use in your formula generation
+
+  // ------------ Helper Methods ------------
+
   shuffleArray(array) {
     const shuffled = [...array];
     for (let i = shuffled.length - 1; i > 0; i--) {
@@ -64,4 +61,13 @@ class FormulaGenerator {
     }
     return shuffled;
   }
+
+  generateRandomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  numberToDigits(number) {
+    return number.toString().split('');
+  }
+
 }

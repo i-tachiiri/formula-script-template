@@ -15,10 +15,7 @@ function generateAndWriteFormulas() {
     console.log('Generating formulas...');
     const formulas = formulaGenerator.generateFormulas();
     
-    console.log('Validating formulas...');
-    if (!formulaGenerator.validateFormulas(formulas)) {
-      throw new Error('Formula validation failed');
-    }
+    console.log(`Generated ${formulas.length} formulas`);
     
     console.log('Writing formulas to spreadsheet...');
     spreadsheetService.writeFormulasToDataSheet(questionSheetUrl, formulas);
