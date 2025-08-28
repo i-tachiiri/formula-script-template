@@ -36,12 +36,3 @@ function generateAndWriteFormulas() {
   }
 }
 
-function testFormulaGeneration() {
-  console.log('Testing formula generation...');
-  try {
-    generateAndWriteFormulas();
-    console.log('Test completed successfully');
-  } catch (error) {
-    console.error('Test failed:', error);
-  }
-}

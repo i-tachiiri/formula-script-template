@@ -23,7 +23,8 @@
       "WebFetch(domain:github.com)",
       "Bash(gh repo view:*)",
       "Bash(git log:*)",
-      "Bash(git checkout:*)"
+      "Bash(git checkout:*)",
+      "Bash(move:*)"
     ],
     "deny": [],
     "ask": []

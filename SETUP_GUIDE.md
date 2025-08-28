@@ -18,16 +18,14 @@ Google Apps Script 用の数式生成テンプレートです。任意の数式�
 ### アーキテクチャ
 
 ```
-main.js → FormulaGenerator.js → FormulaSharedLib → Google Sheets
+main.js → FormulaGenerator.js → SpreadsheetService → Google Sheets
     ↓
-Notion API (PAGE_ID取得・更新)
+NotionService → Notion API (PAGE_ID取得・更新)
 ```
 
 ## 🚀 新プロジェクト作成手順
 
 ### Step 1: GAS のプロジェクトのセットアップ
-
-以下のコマンドを Claude Code に実行します：
 
 ```bash
 # GASプロジェクト作成（Claude Codeが実行）
@@ -38,24 +36,6 @@ npx clasp setting projectId develop-341509
 
 # Cloud Logging有効化（Claude Codeが実行）
 npm run setup-logs
-```
-
-### Step 2: ライブラリ参照の確認
-
-appsscript.json に以下が含まれていることを確認（自動設定済み）:
-
-```json
-{
-  "dependencies": {
-    "libraries": [
-      {
-        "userSymbol": "KeyVault",
-        "libraryId": "18YfPGRKVqtDQNXIVIK6pijnu3hox2mBfFMY11l_A61y1x7qs7Uz6k4zG",
-        "version": "1"
-      }
-    ]
-  }
-}
 ```
 
 ## 📝 Claude 実装ワークフロー
@@ -104,16 +84,7 @@ Claude が以下を実装:
    }
    ```
 
-2. **テスト用の実装確認**
-   ```javascript
-   // テスト実行
-   function testFormulaGeneration() {
-     console.log("Testing formula generation...");
-     generateAndWriteFormulas();
-   }
-   ```
-
-### Phase 3: デプロイ・テスト
+### Phase 3: 実装・デプロイ
 
 ```bash
 # コードをGASにプッシュ
@@ -122,7 +93,7 @@ npm run build
 # ログを監視
 npm run logs:watch
 
-# GAS側でtestFormulaGeneration()を実行してテスト
+# GAS側でgenerateAndWriteFormulas()を直接実行
 ```
 
 ## 🛠 利用可能なユーティリティメソッド
@@ -185,25 +156,36 @@ this.numberToDigits(123); // ['1', '2', '3']
 ];
 ```
 
-## 🔧 デバッグとログ監視
+## 🔧 本番実行とエラー時の対応
 
-### リアルタイムログ監視
+### 基本実行フロー
 
-```bash
-npm run logs:watch
-```
+1. **本番実行**: GAS で`generateAndWriteFormulas()`を直接実行
+2. **ログ監視**: エラー発生時にリアルタイム監視を開始
+3. **デバッグ**: 必要に応じて検証用関数を追加実装
 
-### ログ確認
+### エラー発生時のログ監視
 
-```bash
-npm run logs
-```
+ユーザーが手動でログを貼り付ける
 
-### よくあるエラー
+### よくあるエラーと対処法
 
-1. **FormulaSharedLib 未参照**: appsscript.json でライブラリが参照されていない
+1. **ライブラリ未参照エラー**: appsscript.json で KeyVault ライブラリが参照されていない
 2. **実行権限エラー**: GAS 側で実行権限が不足している場合
-3. **ログ出力されない**: Cloud Logging が正しく設定されていない場合
+3. **ログが表示されない**: Cloud Logging が正しく設定されていない場合
+
+### エラー時の追加デバッグ
+
+エラーが発生した場合、必要に応じて以下のようなデバッグ関数を追加実装:
+
+```javascript
+// 部分的なテスト用関数（エラー時のみ実装）
+function debugFormulaGeneration() {
+  const generator = new FormulaGenerator();
+  const testFormulas = generator.generateFormulas().slice(0, 5);
+  console.log("Sample formulas:", testFormulas);
+}
+```
 
 ## 💡 実装のヒント
 
@@ -222,7 +204,7 @@ npm run logs
 
 - コメントの充実
 - 設定値の外部化
-- テスト関数の作成
+- エラー発生時のデバッグ関数追加（必要に応じて）
 
 ## 📚 関連リンク
 

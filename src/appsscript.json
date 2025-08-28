@@ -4,9 +4,9 @@
     "enabledAdvancedServices": [],
     "libraries": [
       {
-        "userSymbol": "FormulaSharedLib",
-        "libraryId": "1q07i4PHy9Xkb-WQji0Jr7g_67-9MIbBHp4pR9lwhf_98RECClaR3Fjkv",
-        "version": "1"
+        "userSymbol": "KeyVault",
+        "libraryId": "18YfPGRKVqtDQNXIVIK6pijnu3hox2mBfFMY11l_A61y1x7qs7Uz6k4zG",
+        "version": "HEAD"
       }
     ]
   },
