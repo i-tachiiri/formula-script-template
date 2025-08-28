@@ -26,27 +26,26 @@ Notion API (PAGE_ID取得・更新)
 
 新しいプロジェクトは、Notion側で管理するコマンドで実施されるため、手動でのGitHubリポジトリ作成は不要です。
 
-### Step 2: Google Apps Script プロジェクト作成
+### Step 2: Claude Code での自動セットアップ
 
-**重要: 必ず指定フォルダに作成**
+**重要**: PAGE_IDの置換やGCPプロジェクトの設定は、Claude Codeが自動的に処理します。手動設定は不要です。
+
+プロジェクト作成後、以下のコマンドをClaude Codeに実行してもらいます：
+
 ```bash
-# GASプロジェクトを作成（必ずこのフォルダ配下）
+# GASプロジェクト作成（Claude Codeが実行）
 npx clasp create --type standalone --title "[数式名]" --parentId "11ExJC5FifVUDSymmo0LCVFf5kUhJoqMM"
-```
 
-### Step 3: 初期設定
-
-#### 3.1 GCPプロジェクト設定
-```bash
-# GCPプロジェクトIDを設定
+# GCPプロジェクト設定（Claude Codeが実行）
 npx clasp setting projectId develop-341509
 
-# Cloud Logging有効化
+# Cloud Logging有効化（Claude Codeが実行）
 npm run setup-logs
 ```
 
-#### 3.2 KeyVault Library参照
-appsscript.jsonに以下が含まれていることを確認:
+### Step 3: ライブラリ参照の確認
+
+appsscript.jsonに以下が含まれていることを確認（自動設定済み）:
 ```json
 {
   "dependencies": {
@@ -67,17 +66,8 @@ appsscript.jsonに以下が含まれていることを確認:
 Claude に以下を伝えて要件を整理してもらいます:
 
 **Claude への指示テンプレート:**
-```
-このプロジェクトで[数式の種類]の数式生成を実装したい。
 
-現在の状況:
-- テンプレートリポジトリから複製済み
-- GitHubリポジトリ: [URL]
-- GASプロジェクト: [URL]
-- PAGE_ID: [NotionページID]
-
-要件をヒアリングして実装してください。
-```
+プロジェクト作成スクリプト実行後に表示されるプロンプトをそのまま使用してください。PAGE_IDやGCP設定は自動的に処理されるため、実装要件のヒアリングから開始できます。
 
 Claude が確認すべき項目:
 1. **数式の代数表現**
@@ -95,6 +85,8 @@ Claude が確認すべき項目:
 
 4. **重要な制約**
    - ページ内で問題の重複は発生しない（自動的に重複排除される）
+
+**注意**: PAGE_IDの確認やGCPプロジェクト設定の確認は不要です。これらは自動的に処理されています。
 
 ### Phase 2: 実装
 Claude が以下を実装:
@@ -195,9 +187,11 @@ npm run logs
 ```
 
 ### よくあるエラー
-1. **PAGE_ID未設定**: main.jsの`{{PAGE_ID}}`が置換されていない
-2. **GCPプロジェクト未設定**: `.clasp.json`のprojectIdが未設定
-3. **FormulaSharedLib未参照**: appsscript.jsonでライブラリが参照されていない
+1. **FormulaSharedLib未参照**: appsscript.jsonでライブラリが参照されていない
+2. **実行権限エラー**: GAS側で実行権限が不足している場合
+3. **ログ出力されない**: Cloud Logging が正しく設定されていない場合
+
+**注意**: PAGE_IDとGCPプロジェクト設定は自動化されているため、手動確認は不要です。
 
 ## 💡 実装のヒント
 

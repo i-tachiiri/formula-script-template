@@ -37,6 +37,8 @@ Notion API (PAGE_ID取得・更新)
 curl -fsSL https://raw.githubusercontent.com/i-tachiiri/formula-script-template/main/scripts/create-project.js | node - pageId=あなたのPageID projectName=プロジェクト名 formulaType="数式種類"
 ```
 
+**注意**: PAGE_IDは自動的にプロジェクトに設定されます。GCPプロジェクトの設定もClaude Codeが自動的に処理します。
+
 ### セットアップと実装
 詳細は [SETUP_GUIDE.md](./SETUP_GUIDE.md) をご覧ください。
 
