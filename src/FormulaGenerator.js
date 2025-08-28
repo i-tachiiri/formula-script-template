@@ -5,6 +5,11 @@ class FormulaGenerator {
     /**
      * OVERRIDE THIS METHOD in your specific formula generator implementation
      * 
+     * IMPORTANT: Generate data based on your specific requirements
+     * - Determine the total number of problems needed (e.g., pages × problems per page)
+     * - Configure the generation count accordingly in your implementation
+     * - Example: 1000 problems = 100 pages × 10 problems per page
+     * 
      * This method should return an array of formulas. The format is flexible and depends on your needs:
      * 
      * Format examples:
@@ -21,19 +26,23 @@ class FormulaGenerator {
      * 
      * Example implementation patterns:
      * ```javascript
-     * // Basic equations
+     * // Basic equations (adjust totalProblems based on your needs)
      * generateFormulas() {
      *   const formulas = [];
-     *   for (let i = 0; i < 20; i++) {
+     *   const totalProblems = 1000; // Configure this based on requirements
+     *   
+     *   for (let i = 0; i < totalProblems; i++) {
      *     formulas.push(this.createBasicAddition(1, 10));
      *   }
      *   return this.shuffleArray(formulas);
      * }
      * 
-     * // String format problems
+     * // String format problems (configure count for your worksheet needs)
      * generateFormulas() {
      *   const formulas = [];
-     *   for (let i = 0; i < 10; i++) {
+     *   const totalProblems = 500; // Adjust based on your requirements
+     *   
+     *   for (let i = 0; i < totalProblems; i++) {
      *     const num1 = this.generateRandomNumber(1, 10);
      *     const num2 = this.generateRandomNumber(1, 10);
      *     const result = num1 + num2;

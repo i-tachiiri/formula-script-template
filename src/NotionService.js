@@ -2,7 +2,7 @@ class NotionService {
   constructor() {
     const credentials = KeyVault.getNotionCredentials();
     this.apiToken = credentials.token;
-    this.apiVersion = credentials.apiVersion;
+    this.apiVersion = credentials.version;
     this.baseUrl = credentials.baseUrl;
   }
   

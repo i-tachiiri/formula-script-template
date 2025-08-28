@@ -37,3 +37,6 @@ coverage/
 # Temporary folders
 tmp/
 temp/
+
+# Node.js scripts (should not be included in template)
+scripts/

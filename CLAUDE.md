@@ -54,6 +54,11 @@ The project follows a modular architecture:
 ### Implementing Formula Generation
 The `generateFormulas()` method should return an array of formulas. **Format is completely flexible** - design it to match your specific needs.
 
+**Important:** Configure the number of problems based on your worksheet requirements:
+- Determine total problems needed (pages × problems per page)
+- Set `totalProblems` variable accordingly in your implementation
+- Common examples: 500 problems, 1000 problems, or any count specified in requirements
+
 **Available Utility Methods:**
 - `generateRandomNumber(min, max)` - Generate random integer in range
 - `numberToDigits(number)` - Split number into digit array
@@ -62,9 +67,13 @@ The `generateFormulas()` method should return an array of formulas. **Format is 
 **Example Implementations:**
 ```javascript
 // Basic arithmetic problems
+// Generate the required number of formulas based on your worksheet needs
+// Example: 1000 problems = 100 pages × 10 problems per page
 generateFormulas() {
   const formulas = [];
-  for (let i = 0; i < 20; i++) {
+  const totalProblems = 1000; // Adjust this number based on your requirements
+  
+  for (let i = 0; i < totalProblems; i++) {
     const num1 = this.generateRandomNumber(1, 10);
     const num2 = this.generateRandomNumber(1, 10);
     formulas.push([num1, '+', num2, '=', num1 + num2]);
