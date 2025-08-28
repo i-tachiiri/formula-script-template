@@ -109,6 +109,7 @@ try {
   console.log('─'.repeat(60));
   console.log(`このプロジェクトで${config.formulaType}の数式生成を実装したいです。README.md と SETUP_GUIDE.md を参照し、実装の計画を立て、不明点があれば聞いて下さい。`);
   console.log('数式：');
+  console.log('データ形式：');
   console.log('値の範囲・条件：');
   console.log('1ページの問題数：');
   console.log('作成する問題数：');
