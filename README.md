@@ -64,7 +64,7 @@ npx clasp login
 
 - `npm run build` - コードを Google Apps Script にプッシュ
 - `npm run watch` - ファイル変更を監視して自動プッシュ
-- `npm run open` - ブラウザで GAS エディタを開く
+- `npm run open` - Claude に GAS スクリプトエディタを開いてもらう（Claude が .clasp.json から scriptId を読み取ってブラウザで開く）
 - `npm run deploy` - 新しいバージョンをデプロイ
 
 ### ファイル構成

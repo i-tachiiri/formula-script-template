@@ -35,7 +35,7 @@ The project follows a modular architecture:
 
 - `npm run build` - Push code to Google Apps Script
 - `npm run watch` - Watch for file changes and auto-push
-- `npm run open` - Open GAS editor in browser
+- `npm run open` - Guide Claude to open the GAS script editor (Claude will read .clasp.json scriptId and open browser)
 - `npm run logs` - View execution logs
 - `npm run logs:watch` - Watch execution logs in real-time
 - `npm run setup-logs` - Setup Cloud Logging for GCP project

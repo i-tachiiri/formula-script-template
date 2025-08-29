@@ -95,9 +95,6 @@ Claude が以下を実装:
 # コードをGASにプッシュ
 npm run build
 
-# ログを監視
-npm run logs:watch
-
 # GAS側でgenerateAndWriteFormulas()を直接実行
 ```
 

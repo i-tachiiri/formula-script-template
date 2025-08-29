@@ -5,7 +5,7 @@
   "scripts": {
     "build": "clasp push",
     "watch": "clasp push --watch",
-    "open": "clasp open",
+    "open": "echo Use Claude to open script editor with scriptId from .clasp.json",
     "logs": "clasp logs",
     "logs:watch": "clasp logs --watch",
     "setup-logs": "clasp setup-logs",
