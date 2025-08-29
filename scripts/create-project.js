@@ -72,7 +72,7 @@ try {
   if (!repositoryExists) {
     // Step 3: PAGE_IDを置換（新規作成時のみ）
     console.log('\n🔄 PAGE_IDを置換中...');
-    const mainJsPath = path.join('src', 'main.js');
+    const mainJsPath = path.join('src', '_main.js');
     const mainJsContent = fs.readFileSync(mainJsPath, 'utf8');
     const updatedContent = mainJsContent.replace('{{PAGE_ID}}', config.pageId);
     fs.writeFileSync(mainJsPath, updatedContent);
@@ -86,6 +86,18 @@ try {
     readmeContent = readmeContent.replace(/数式生成テンプレートプロジェクトです。/g, `${config.formulaType}の数式生成プロジェクトです。`);
     fs.writeFileSync(readmePath, readmeContent);
     console.log(`✅ README.md を ${config.formulaType} 用に更新しました`);
+
+    // Step 4.5: .clasp.json.templateをコピーして.clasp.jsonを準備（新規作成時のみ）
+    console.log('\n⚙️  .clasp.json設定を準備中...');
+    const templatePath = '.clasp.json.template';
+    const claspJsonPath = '.clasp.json';
+    
+    if (fs.existsSync(templatePath)) {
+      const templateContent = fs.readFileSync(templatePath, 'utf8');
+      fs.writeFileSync(claspJsonPath, templateContent);
+      console.log('✅ .clasp.json.templateから設定をコピーしました');
+      console.log('ℹ️  clasp create実行後に実際のscriptIdで上書きされます');
+    }
   } else {
     console.log('\n📝 既存リポジトリのため、PAGE_ID置換とREADME更新をスキップしました');
     console.log(`ℹ️  必要に応じて手動でPAGE_IDを確認してください: ${config.pageId}`);

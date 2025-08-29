@@ -11,14 +11,13 @@ Google Apps Script 用の数式生成テンプレートです。任意の数式�
 ### 主な機能
 
 - **柔軟な数式フォーマット**: 配列、文字列、カスタム構造など任意の形式に対応
-- **Notion 連携**: FormulaSharedLib ライブラリ経由で Notion データベースと連携
+- **Notion 連携**: NotionService 経由で Notion データベースと連携
 - **Google Sheets 出力**: 生成した数式をスプレッドシートに出力
-- **Cloud Logging**: リアルタイムでの実行ログ監視
 
 ### アーキテクチャ
 
 ```
-main.js → FormulaGenerator.js → SpreadsheetService → Google Sheets
+_main.js → FormulaGenerator.js → SpreadsheetService → Google Sheets
     ↓
 NotionService → Notion API (PAGE_ID取得・更新)
 ```
@@ -32,7 +31,13 @@ NotionService → Notion API (PAGE_ID取得・更新)
 npx clasp create --type standalone --title "[数式名]" --parentId "11ExJC5FifVUDSymmo0LCVFf5kUhJoqMM"
 
 # GCPプロジェクト設定（Claude Codeが実行）
-npx clasp setting projectId develop-341509
+# .clasp.jsonファイルを直接編集してprojectIdを適用
+# clasp createで生成される.clasp.jsonに、テンプレートのprojectIdを手動で追加
+Edit .clasp.json: "projectId": "develop-341509"を追加（テンプレートから.clasp.json.templateを参照）
+
+# appsscript.json設定復元（Claude Codeが実行）
+# clasp createでappsscript.jsonが上書きされるため、テンプレート設定を復元
+Copy src/appsscript.json.template → src/appsscript.json（KeyVaultライブラリ等の設定を復元）
 
 # Cloud Logging有効化（Claude Codeが実行）
 npm run setup-logs
@@ -172,7 +177,6 @@ this.numberToDigits(123); // ['1', '2', '3']
 
 1. **ライブラリ未参照エラー**: appsscript.json で KeyVault ライブラリが参照されていない
 2. **実行権限エラー**: GAS 側で実行権限が不足している場合
-3. **ログが表示されない**: Cloud Logging が正しく設定されていない場合
 
 ### エラー時の追加デバッグ
 
@@ -210,7 +214,6 @@ function debugFormulaGeneration() {
 
 - **テンプレートリポジトリ**: https://github.com/i-tachiiri/formula-script-template
 - **Google Drive フォルダ**: https://drive.google.com/drive/folders/11ExJC5FifVUDSymmo0LCVFf5kUhJoqMM
-- **FormulaSharedLib**: Google Apps Script ライブラリ (ID: 1q07i4PHy9Xkb-WQji0Jr7g_67-9MIbBHp4pR9lwhf_98RECClaR3Fjkv)
 
 ---
 

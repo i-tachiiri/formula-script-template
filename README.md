@@ -9,9 +9,8 @@ Google Apps Script 用の数式生成テンプレートプロジェクトです�
 ### 主な機能
 
 - **柔軟な数式フォーマット**: 配列、文字列、カスタム構造など任意の形式に対応
-- **Notion 連携**: FormulaSharedLib ライブラリ経由で Notion データベースと連携
+- **Notion 連携**: NotionService 経由で Notion データベースと連携
 - **Google Sheets 出力**: 生成した数式をスプレッドシートに出力
-- **Cloud Logging**: リアルタイムでの実行ログ監視
 - **CLASP 統合**: ローカル開発環境から GAS プロジェクトを管理
 
 ## 📚 ドキュメント
@@ -28,7 +27,7 @@ Google Apps Script 用の数式生成テンプレートプロジェクトです�
 ## 🏗️ アーキテクチャ
 
 ```
-main.js → FormulaGenerator.js → FormulaSharedLib → Google Sheets
+_main.js → FormulaGenerator.js →  Google Sheets
     ↓
 Notion API (PAGE_ID取得・更新)
 ```
@@ -66,14 +65,13 @@ npx clasp login
 - `npm run build` - コードを Google Apps Script にプッシュ
 - `npm run watch` - ファイル変更を監視して自動プッシュ
 - `npm run open` - ブラウザで GAS エディタを開く
-- `npm run logs` - 実行ログを表示
 - `npm run deploy` - 新しいバージョンをデプロイ
 
 ### ファイル構成
 
 ```
 src/
-├── main.js           - メイン処理
+├── _main.js          - メイン処理
 ├── FormulaGenerator.js - 数式生成ロジック
 └── appsscript.json   - Apps Script設定
 ```

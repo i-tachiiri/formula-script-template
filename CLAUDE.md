@@ -20,7 +20,7 @@ This is a Google Apps Script template for formula generation projects. It provid
 
 The project follows a modular architecture:
 
-- **main.js**: Entry point containing the main `generateAndWriteFormulas()` function that orchestrates the workflow
+- **_main.js**: Entry point containing the main `generateAndWriteFormulas()` function that orchestrates the workflow
 - **FormulaGenerator.js**: Base class for formula generation with validation logic - designed to be extended for specific formula types
 - **External Library Integration**: Uses `FormulaSharedLib` (library ID: 1q07i4PHy9Xkb-WQji0Jr7g_67-9MIbBHp4pR9lwhf_98RECClaR3Fjkv) for Notion and Spreadsheet services
 
@@ -46,7 +46,7 @@ The project follows a modular architecture:
 ## Template Usage
 
 ### Initial Setup
-1. Replace `{{PAGE_ID}}` in main.js with actual Notion page ID
+1. Replace `{{PAGE_ID}}` in _main.js with actual Notion page ID
 2. Replace `REPLACE_WITH_YOUR_GCP_PROJECT_ID` in .clasp.json with your GCP project ID
 3. Run `npm run setup-logs` to enable Cloud Logging
 4. Extend FormulaGenerator class and override `generateFormulas()` method

@@ -1,0 +1,18 @@
+{
+  "scriptId": "PLACEHOLDER_SCRIPT_ID",
+  "rootDir": "src",
+  "parentId": "1w9JZ81FZlWTcc_oi3_eAzX7FdBxJeDaX",
+  "projectId": "develop-341509",
+  "scriptExtensions": [
+    ".js",
+    ".gs"
+  ],
+  "htmlExtensions": [
+    ".html"
+  ],
+  "jsonExtensions": [
+    ".json"
+  ],
+  "filePushOrder": [],
+  "skipSubdirectories": false
+}

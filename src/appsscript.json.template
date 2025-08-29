@@ -1,0 +1,15 @@
+{
+  "timeZone": "Asia/Tokyo",
+  "dependencies": {
+    "enabledAdvancedServices": [],
+    "libraries": [
+      {
+        "userSymbol": "KeyVault",
+        "libraryId": "18YfPGRKVqtDQNXIVIK6pijnu3hox2mBfFMY11l_A61y1x7qs7Uz6k4zG",
+        "version": "HEAD"
+      }
+    ]
+  },
+  "exceptionLogging": "STACKDRIVER",
+  "runtimeVersion": "V8"
+}
